@@ -9,7 +9,7 @@
             string course = studentForm.courseSelection();
             string action = queryAction();
 
-            if (action.Equals("1")) studentForm.addStudent(course);
+            if(action.Equals("1")) studentForm.addStudent(course);
             else studentForm.studentInformation(course);
         }
 

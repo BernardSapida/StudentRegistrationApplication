@@ -32,22 +32,30 @@
 
         public void addStudent(string course)
         {
-            switch(course)
+            if(bsitStudentNumbers + bscsStudentNumbers + msitStudentNumbers + mscsStudentNumbers < 6)
             {
-                case "1":
-                    registerBSITStudent();
-                    break;
-                case "2":
-                    registerBSCStudent();
-                    break;
-                case "3":
-                    registerMSITStudent();
-                    break;
-                case "4":
-                    registerMSCStudent();
-                    break;
+                switch (course)
+                {
+                    case "1":
+                        registerBSITStudent();
+                        break;
+                    case "2":
+                        registerBSCStudent();
+                        break;
+                    case "3":
+                        registerMSITStudent();
+                        break;
+                    case "4":
+                        registerMSCStudent();
+                        break;
+                }
+                Console.WriteLine("\n==================================================================\n");
+            } else
+            {
+                Console.WriteLine("The maximum students you can enroll is 6! Limit reached.");
+                Console.WriteLine("\n==================================================================\n");
             }
-            Console.WriteLine("\n==================================================================\n");
+
         }
 
         public void studentInformation(string course)
