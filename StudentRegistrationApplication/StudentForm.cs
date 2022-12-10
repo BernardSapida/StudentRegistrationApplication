@@ -8,6 +8,7 @@
         MSCS[] mscsStudents = new MSCS[6];
         int bsitStudentNumbers, bscsStudentNumbers, msitStudentNumbers, mscsStudentNumbers = 0;
 
+        /// It will ask the user to choose a course and will return the course that the user chose
         public string courseSelection()
         {
             while (true)
@@ -26,142 +27,29 @@
                     return course;
                 }
                 else Console.WriteLine("The course is invalid! Please try again.");
-
             }
         }
 
-        public void addStudent(string course)
+        /// This function is used to add a student to the list of students.
+        public Student addStudent(string course, Student student)
         {
             if(bsitStudentNumbers + bscsStudentNumbers + msitStudentNumbers + mscsStudentNumbers < 6)
             {
-                switch (course)
-                {
-                    case "1":
-                        registerBSITStudent();
-                        break;
-                    case "2":
-                        registerBSCStudent();
-                        break;
-                    case "3":
-                        registerMSITStudent();
-                        break;
-                    case "4":
-                        registerMSCStudent();
-                        break;
-                }
-                Console.WriteLine("\n==================================================================\n");
+                if(course.Equals("1")) return registerBSITStudent(student);
+                else if(course.Equals("2")) return registerBSCStudent(student);
+                else if(course.Equals("3")) return registerMSITStudent(student);
+                else if(course.Equals("4")) return registerMSCStudent(student);
             } else
             {
                 Console.WriteLine("The maximum students you can enroll is 6! Limit reached.");
                 Console.WriteLine("\n==================================================================\n");
             }
 
+            return student;
         }
 
-        public void studentInformation(string course)
-        {
-            Console.WriteLine("Students Information");
-            Console.WriteLine("\n==================================================================\n");
-            switch (course)
-            {
-                case "1":
-                    displayBSITStudent();
-                    break;
-                case "2":
-                    displayBSCStudent();
-                    break;
-                case "3":
-                    displayMSITStudent();
-                    break;
-                case "4":
-                    displayMSCStudent();
-                    break;
-            }
-        }
-
-        public void displayBSITStudent()
-        {
-            if(bsitStudentNumbers == 0)
-            {
-                Console.WriteLine("No students enrolled yet in BSIT!");
-                Console.WriteLine("\n==================================================================\n");
-            } else
-            {
-                for (int i = 0; i < bsitStudentNumbers; i++)
-                {
-                    Console.WriteLine("Student Name: " + bsitStudents[i].getName());
-                    Console.WriteLine("Student Age: " + bsitStudents[i].getAge());
-                    Console.WriteLine("Student Address: " + bsitStudents[i].getAddress());
-                    Console.WriteLine("Student Gender: " + bsitStudents[i].getGender());
-                    Console.WriteLine("Student Year Level: " + bsitStudents[i].getYearLevel());
-                    Console.WriteLine("\n==================================================================\n");
-                }
-            }
-        }
-
-        public void displayBSCStudent()
-        {
-            if (bsitStudentNumbers == 0)
-            {
-                Console.WriteLine("No students enrolled yet in BSCS!");
-                Console.WriteLine("\n==================================================================\n");
-            } else
-            {
-                for (int i = 0; i < bscsStudentNumbers; i++)
-                {
-                    Console.WriteLine("Student Name: " + bscsStudents[i].getName());
-                    Console.WriteLine("Student Age: " + bscsStudents[i].getAge());
-                    Console.WriteLine("Student Address: " + bscsStudents[i].getAddress());
-                    Console.WriteLine("Student Gender: " + bscsStudents[i].getGender());
-                    Console.WriteLine("Student Specialization: " + bscsStudents[i].getSpecialization());
-                    Console.WriteLine("\n==================================================================\n");
-                }
-            }
-        }
-
-        public void displayMSITStudent()
-        {
-            if (bsitStudentNumbers == 0)
-            {
-                Console.WriteLine("No students enrolled yet in MSIT!");
-                Console.WriteLine("\n==================================================================\n");
-            } else
-            {
-                for (int i = 0; i < msitStudentNumbers; i++)
-                {
-                    Console.WriteLine("Student Name: " + msitStudents[i].getName());
-                    Console.WriteLine("Student Age: " + msitStudents[i].getAge());
-                    Console.WriteLine("Student Address: " + msitStudents[i].getAddress());
-                    Console.WriteLine("Student Gender: " + msitStudents[i].getGender());
-                    Console.WriteLine("Student Year Level: " + msitStudents[i].getYearLevel());
-                    Console.WriteLine("Student Thesis Type: " + msitStudents[i].getThesisType());
-                    Console.WriteLine("\n==================================================================\n");
-                }
-            }
-        }
-
-        public void displayMSCStudent()
-        {
-            if (bsitStudentNumbers == 0)
-            {
-                Console.WriteLine("No students enrolled yet in MSCS!");
-                Console.WriteLine("\n==================================================================\n");
-            } else
-            {
-                for (int i = 0; i < mscsStudentNumbers; i++)
-                {
-                    Console.WriteLine("Student Name: " + mscsStudents[i].getName());
-                    Console.WriteLine("Student Age: " + mscsStudents[i].getAge());
-                    Console.WriteLine("Student Address: " + mscsStudents[i].getAddress());
-                    Console.WriteLine("Student Gender: " + mscsStudents[i].getGender());
-                    Console.WriteLine("Student Specialization: " + mscsStudents[i].getSpecialization());
-                    Console.WriteLine("Student Connected Company Type: " + mscsStudents[i].getConnectedCompanyType());
-                    Console.WriteLine("\n==================================================================\n");
-                }
-            }
-        }
-
-        public void registerBSITStudent()
+        /// It registers a BSIT student
+        public Student registerBSITStudent(Student student)
         {
             Console.Write("Name: ");
             string name = Console.ReadLine();
@@ -211,10 +99,16 @@
             this.bsitStudents[bsitStudentNumbers].setAddress(address);
             this.bsitStudents[bsitStudentNumbers].setGender(gender);
             this.bsitStudents[bsitStudentNumbers].setYearLevel(yearLevel);
+
+            student.newBSITStudent(this.bsitStudents[bsitStudentNumbers], bsitStudentNumbers);
+
             bsitStudentNumbers++;
+
+            return student;
         }
 
-        public void registerBSCStudent()
+        /// It takes the user's input and stores it in the array of BSCS objects
+        public Student registerBSCStudent(Student student)
         {
             Console.Write("Name: ");
             string name = Console.ReadLine();
@@ -264,10 +158,16 @@
             bscsStudents[bscsStudentNumbers].setAddress(address);
             bscsStudents[bscsStudentNumbers].setGender(gender);
             bscsStudents[bscsStudentNumbers].setSpecialization(specialization);
+
+            student.newBSCSStudent(this.bscsStudents[bscsStudentNumbers], bscsStudentNumbers);
+
             bscsStudentNumbers++;
+
+            return student;
         }
 
-        public void registerMSITStudent()
+        /// It registers a student in the MSIT program
+        public Student registerMSITStudent(Student student)
         {
             Console.Write("Name: ");
             string name = Console.ReadLine();
@@ -330,10 +230,16 @@
             msitStudents[msitStudentNumbers].setGender(gender);
             msitStudents[msitStudentNumbers].setYearLevel(yearLevel);
             msitStudents[msitStudentNumbers].setThesisType(thesisType);
+
+            student.newMSITStudent(this.msitStudents[msitStudentNumbers], msitStudentNumbers);
+
             msitStudentNumbers++;
+
+            return student;
         }
 
-        public void registerMSCStudent()
+        /// This function is used to register a new MSCS student
+        public Student registerMSCStudent(Student student)
         {
             Console.Write("Name: ");
             string name = Console.ReadLine();
@@ -399,7 +305,12 @@
             mscsStudents[mscsStudentNumbers].setGender(gender);
             mscsStudents[mscsStudentNumbers].setSpecialization(specialization);
             mscsStudents[mscsStudentNumbers].setConnectedCompanyType(connectedCompanyType);
+
+            student.newMSCSStudent(this.mscsStudents[mscsStudentNumbers], mscsStudentNumbers);
+
             mscsStudentNumbers++;
+
+            return student;
         }
     }
 }
